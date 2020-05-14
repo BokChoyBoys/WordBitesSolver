@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/** Main class for running solver.
+ * @author Pierre Le
+ */
 public class Main {
     public static void main(String[] args) throws Exception {
         File words = new File("dictionary.json");
@@ -40,14 +43,22 @@ public class Main {
             pieces.add(new Piece(s.charAt(0)));
         }
         List<String> goodwords = new ArrayList<String>();
-        move(goodwords, wordset, pieces);
+        moveHorz(new HashSet<Piece>(), words, "", wordset, pieces);
+        moveVert(new HashSet<Piece>(), words, "", wordset, pieces);
         Collections.sort(goodwords, new StringLengthComparator(""));
         System.out.println(goodwords);
     }
-    private static void move(List<String> words, HashSet<String> wordset, List<Piece> pieces) {
-        moveHorz(new HashSet<Piece>(), words, "", wordset, pieces);
-        moveVert(new HashSet<Piece>(), words, "", wordset, pieces);
-    }
+
+    /** Finds the longest words that can be made horizontally using full horizontal pieces with half vertical pieces.
+     *  and single tiles. Max length word is 8 due to 9x8 board ingame.
+     *
+     *
+     * @param piecesTraversed Set for checking if a piece is already used in the word
+     * @param words List of words that can be made with a set of pieces
+     * @param word Current word being made with pieces
+     * @param wordset Set of all words in dictionary
+     * @param pieces List of pieces given by input
+     */
     private static void moveHorz(HashSet<Piece> piecesTraversed,
                                  List<String> words, String word, HashSet<String> wordset, List<Piece> pieces) {
         if (wordset.contains(word) && !words.contains(word)) {
@@ -72,6 +83,16 @@ public class Main {
             }
         }
     }
+
+    /** Moves vertically to find longest possible words. Max length is 9.
+     * Same parameters as moveHorz.
+     *
+     * @param piecesTraversed Set for checking if a piece is already used in the word
+     * @param words List of words that can be made with a set of pieces
+     * @param word Current word being made with pieces
+     * @param wordset Set of all words in dictionary
+     * @param pieces List of pieces given by input
+     */
     private static void moveVert(HashSet<Piece> piecesTraversed,
                                  List<String> words, String word, HashSet<String> wordset, List<Piece> pieces) {
         if (wordset.contains(word) && !words.contains(word)) {
@@ -96,6 +117,14 @@ public class Main {
             }
         }
     }
+
+    /** Helper function for reducing size of wordset to prune impossible words made with pieces.
+     *
+     * @param wordset Set of possible words
+     * @param word Current word
+     * @param len length of word
+     * @return pruned HashSet with only possible words with word
+     */
     private static HashSet<String> updatewordSet(HashSet<String> wordset, String word, int len) {
         HashSet<String> newset = new HashSet<String>();
         for (String s: wordset) {
