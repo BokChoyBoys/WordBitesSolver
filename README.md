@@ -1,7 +1,7 @@
 # Word Bites Solver #
 It is a program used to find the best words in the game Word Bites.
 
-#How To Use
+# How To Use
 1. Download the repository.
 
 2. Run main with `java Main`. (`javac Main.java` if it isn't compiled)
