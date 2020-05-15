@@ -34,13 +34,19 @@ public class Main {
         String[] singlelets = single.split("\\s+");
         List<Piece> pieces = new ArrayList<Piece>();
         for (String s: horzlets) {
-            pieces.add(new Piece(s.charAt(0), s.charAt(1), true));
+            if (!s.equals("") && s.length() == 2) {
+                pieces.add(new Piece(s.charAt(0), s.charAt(1), true));
+            }
         }
         for (String s: vertlets) {
-            pieces.add(new Piece(s.charAt(0), s.charAt(1), false));
+            if (!s.equals("") && s.length() == 2) {
+                pieces.add(new Piece(s.charAt(0), s.charAt(1), false));
+            }
         }
         for (String s: singlelets) {
-            pieces.add(new Piece(s.charAt(0)));
+            if (!s.equals("") && s.length() == 1) {
+                pieces.add(new Piece(s.charAt(0)));
+            }
         }
         List<String> goodwords = new ArrayList<String>();
         moveHorz(new HashSet<Piece>(), goodwords, "", wordset, pieces);
@@ -61,7 +67,7 @@ public class Main {
      */
     private static void moveHorz(HashSet<Piece> piecesTraversed,
                                  List<String> words, String word, HashSet<String> wordset, List<Piece> pieces) {
-        if (wordset.contains(word) && !words.contains(word)) {
+        if (word.length() < 9 && wordset.contains(word) && !words.contains(word)) {
             words.add(word);
         }
         if (wordset.isEmpty() || word.length() > 8) {
@@ -95,7 +101,7 @@ public class Main {
      */
     private static void moveVert(HashSet<Piece> piecesTraversed,
                                  List<String> words, String word, HashSet<String> wordset, List<Piece> pieces) {
-        if (wordset.contains(word) && !words.contains(word)) {
+        if (word.length() < 10 && wordset.contains(word) && !words.contains(word)) {
             words.add(word);
         }
         if (wordset.isEmpty() || word.length() > 9) {
