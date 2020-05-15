@@ -23,11 +23,11 @@ public class Main {
             }
         }
         Scanner kb = new Scanner(System.in);
-        System.out.println("HORZ");
+        System.out.println("What are your horizontal tiles?");
         String horz = kb.nextLine();
-        System.out.println("VERT");
+        System.out.println("What are your vertical tiles?");
         String vert = kb.nextLine();
-        System.out.println("SINGLE");
+        System.out.println("What are your single tiles?");
         String single = kb.nextLine();
         String[] horzlets = horz.split("\\s+");
         String[] vertlets = vert.split("\\s+");

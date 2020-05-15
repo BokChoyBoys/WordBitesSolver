@@ -23,9 +23,12 @@ Board:
 - - - - - - - -
 - - - - - - - e
 ```
-Input:
-ab fg
-cd hi
+Input: \
+What are your horizontal tiles? \
+ab fg \
+What are your vertical tiles? \
+cd hi \
+What are your single tiles? \
 e
 
 4. Put words in lol
