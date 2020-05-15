@@ -43,8 +43,8 @@ public class Main {
             pieces.add(new Piece(s.charAt(0)));
         }
         List<String> goodwords = new ArrayList<String>();
-        moveHorz(new HashSet<Piece>(), words, "", wordset, pieces);
-        moveVert(new HashSet<Piece>(), words, "", wordset, pieces);
+        moveHorz(new HashSet<Piece>(), goodwords, "", wordset, pieces);
+        moveVert(new HashSet<Piece>(), goodwords, "", wordset, pieces);
         Collections.sort(goodwords, new StringLengthComparator(""));
         System.out.println(goodwords);
     }
